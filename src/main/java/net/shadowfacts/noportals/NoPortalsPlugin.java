@@ -18,7 +18,7 @@ public class NoPortalsPlugin implements IFMLLoadingPlugin {
 
 	@Override
 	public String getModContainerClass() {
-		return "net.shadowfacts.noportals.NoPortalsModContainer";
+		return null;
 	}
 
 	@Override

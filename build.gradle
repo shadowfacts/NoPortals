@@ -27,3 +27,24 @@ minecraft {
 	version = "$minecraft_version-$forge_version"
 	runDir = "run"
 }
+
+jar {
+    manifest {
+        attributes 'FMLCorePlugin': 'net.shadowfacts.noportals.NoPortalsPlugin'
+        attributes 'FMLCorePluginContainsMod': 'true'
+    }
+}
+
+processResources {
+	inputs.property "version", "$mod_version"
+	
+	from(sourceSets.main.resources.srcDirs) {
+		include '**/*.info'
+		expand 'version':"$mod_version",'mcversion':"$minecraft_version"
+	}
+
+	from(sourceSets.main.resources.srcDirs) {
+		exclude '**/*.info'
+	}
+
+}

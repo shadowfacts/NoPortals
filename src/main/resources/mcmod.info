@@ -1,0 +1,16 @@
+[
+{
+  "modid": "NoPortals",
+  "name": "NoPortals",
+  "description": "Prevents portals to the overworld from being created when the dragon dies.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://github.com/shadowfacts/NoPortals",
+  "updateUrl": "",
+  "authorList": ["Shadowfacts"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
