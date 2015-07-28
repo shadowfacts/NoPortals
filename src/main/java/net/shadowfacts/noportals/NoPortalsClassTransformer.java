@@ -3,9 +3,8 @@ package net.shadowfacts.noportals;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.tree.AbstractInsnNode;
-import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.MethodInsnNode;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.tree.*;
 
 import static org.objectweb.asm.Opcodes.*;
 
@@ -93,6 +92,20 @@ public class NoPortalsClassTransformer implements IClassTransformer {
 							targetNode = targetNode.getPrevious();
 							method.instructions.remove(targetNode.getNext());
 						}
+
+						/*
+						Add call to spawn dragon egg
+
+						ALOAD 0
+						INVOKESTATIC net/shadowfacts/noportals/Utils.spawnEgg (Lnet/minecraft/entity/Entity;)V
+						 */
+						final String SPAWN_EGG_DESC = isObfuscated ? "(Lsa;)V" : "(Lnet/minecraft/entity/Entity;)V";
+
+						InsnList toInsert = new InsnList();
+						toInsert.add(new VarInsnNode(ALOAD, 0));
+						toInsert.add(new MethodInsnNode(INVOKESTATIC, Type.getInternalName(Utils.class), "spawnEgg", SPAWN_EGG_DESC, false));
+
+						method.instructions.insertBefore(targetNode.getNext(), toInsert);
 
 					} else {
 						System.err.println("Target node (INVOKESPECIAL createEnderPortal (II)V) could not be found in EntityDragon.onDeathUpdate");

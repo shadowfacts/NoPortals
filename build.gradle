@@ -23,6 +23,9 @@ if (System.getenv().BUILD_NUMBER != null) {
 	version += "-build-" + System.getenv().BUILD_NUMBER
 }
 
+sourceCompatibility=JavaVersion.VERSION_1_8
+targetCompatibility=JavaVersion.VERSION_1_8
+
 minecraft {
 	version = "$minecraft_version-$forge_version"
 	runDir = "run"
