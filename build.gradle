@@ -1,0 +1,29 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		maven {
+			name = "forge"
+			url = "http://files.minecraftforge.net/maven"
+		}
+		maven {
+			name = "sonatype"
+			url = "https://oss.sonatype.org/content/repositories/snapshots/"
+		}
+	}
+	dependencies {
+		classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+	}
+}
+
+apply plugin: 'forge'
+
+version = "$minecraft_version-$mod_version"
+
+if (System.getenv().BUILD_NUMBER != null) {
+	version += "-build-" + System.getenv().BUILD_NUMBER
+}
+
+minecraft {
+	version = "$minecraft_version-$forge_version"
+	runDir = "run"
+}
